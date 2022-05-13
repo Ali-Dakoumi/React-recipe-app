@@ -1,60 +1,39 @@
-import { useState } from "react";
-import Header from "./components/Header";
-import Tasks from "./components/Tasks";
-import AddTask from "./components/AddTask";
-
+import Pages from "./pages/Pages";
+import Category from "./components/Category";
+import { BrowserRouter } from "react-router-dom";
+import Search from "./components/Search";
+import styled from "styled-components";
+import { Link } from "react-router-dom";
+import { GiKnifeFork } from "react-icons/gi";
 const App = () => {
-  const [tasks, setTasks] = useState([
-    {
-      id: 1,
-      text: "Doctors ",
-      day: 1,
-      reminder: false,
-    },
-    {
-      id: 2,
-      text: "Players ",
-      day: 2,
-      reminder: false,
-    },
-  ]);
-
-  const [showAddTask, setShowAddTask] = useState(false);
-
-  const addTask = (task) => {
-    const id = Math.floor(Math.random() * 1000) + 1;
-    const newTask = { id, ...task };
-    setTasks([...tasks, newTask]);
-  };
-
-  const toggleReminder = (id) => {
-    setTasks(
-      tasks.map((task) =>
-        task.id === id ? { ...task, reminder: !task.reminder } : task
-      )
-    );
-  };
-
-  const deleteTask = (id) => {
-    setTasks(tasks.filter((task) => task.id !== id));
-    console.log(id);
-  };
-
   return (
-    <div className="container">
-      <Header
-        showAdd={showAddTask}
-        onAdd={() => setShowAddTask(!showAddTask)}
-        title="Task Tracker"
-      />
-      {showAddTask && <AddTask onAdd={addTask} />}
-      {tasks.length > 0 ? (
-        <Tasks tasks={tasks} onDelete={deleteTask} onToggle={toggleReminder} />
-      ) : (
-        "no tasks to show"
-      )}{" "}
+    <div className="app">
+      <BrowserRouter>
+        <Nav>
+          <GiKnifeFork />
+          <Logo to={"/"}> Delicious </Logo>
+        </Nav>
+        <Category />
+        <Search />
+        <Pages />
+      </BrowserRouter>
     </div>
   );
 };
+
+const Logo = styled(Link)`
+  text-decoration: none;
+  font-size: 1.5rem;
+`;
+
+const Nav = styled.div`
+  padding: 4rem 0rem;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  svg {
+    font-size: 2rem;
+  }
+`;
 
 export default App;
