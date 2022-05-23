@@ -11,7 +11,7 @@ const App = () => {
       <BrowserRouter>
         <Nav>
           <GiKnifeFork />
-          <Logo to={"/"}> Delicious </Logo>
+          <Logo to={"/React-recipe-app"}> Delicious </Logo>
         </Nav>
         <Search />
         <Category />
