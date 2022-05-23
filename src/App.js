@@ -13,8 +13,8 @@ const App = () => {
           <GiKnifeFork />
           <Logo to={"/"}> Delicious </Logo>
         </Nav>
-        <Category />
         <Search />
+        <Category />
         <Pages />
       </BrowserRouter>
     </div>
