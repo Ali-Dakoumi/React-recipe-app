@@ -19,7 +19,6 @@ const Search = () => {
         type="text"
       />
       <FaSearch />
-      {console.log(input)}
     </FormStyle>
   );
 };

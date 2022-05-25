@@ -15,7 +15,9 @@ const Recipe = () => {
     const detailData = await data.json();
     console.log(detailData);
     setDetails(detailData);
-    console.log(details.extendedIngredients);
+    console.log(
+      detailData.extendedIngredients.map((ingredient) => ingredient.original)
+    );
   };
 
   useEffect(() => {
@@ -47,15 +49,16 @@ const Recipe = () => {
         </Button>
         {activeTab === "instructions" && (
           <div>
-            {/* <h3 dangerouslySetInnerHTML={{ __html: details.summary }}> </h3> */}
-            {/* <h3 dangerouslySetInnerHTML={{ __html: details.instructions }}> */}
-            {/* </h3> */}
+            <Par dangerouslySetInnerHTML={{ __html: `${details.summary} ` }} />
+            <Par
+              dangerouslySetInnerHTML={{ __html: `${details.instructions} ` }}
+            />
           </div>
         )}
         {activeTab === "ingredients" && (
           <ul>
             {details.extendedIngredients.map((ingredient) => {
-              <li key={ingredient.id}> {ingredient.original}</li>;
+              return <li key={ingredient.id}> {ingredient.original} </li>;
             })}
           </ul>
         )}
@@ -92,6 +95,10 @@ const Button = styled.button`
 
 const Info = styled.div`
   margin-left: 10rem;
+`;
+
+const Par = styled.p`
+  margin-top: 1rem;
 `;
 
 export default Recipe;
